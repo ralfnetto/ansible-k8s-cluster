@@ -1,0 +1,20 @@
+---
+  - name: K8S settings requirements
+    hosts: 
+      - masters
+      - workers
+    roles:
+      - k8s-requirements
+    become: yes
+
+  - name: Add masters to cluster
+    hosts: masters
+    roles:
+      - add-master-cluster
+    become: yes
+
+  - name: Add workers to cluster
+    hosts: workers
+    roles:
+      - add-worker-cluster
+    become: yes

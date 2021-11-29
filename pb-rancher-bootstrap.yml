@@ -1,0 +1,12 @@
+---
+  - name: K8S settings requirements
+    hosts: rancher
+    roles:
+      - k8s-requirements
+    become: yes
+
+  - name: Bootstrap Rancher Node
+    hosts: rancher
+    roles:
+      - bootstrap-rancher-singlenode
+    become: yes

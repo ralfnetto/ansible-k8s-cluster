@@ -1,0 +1,8 @@
+[masters]
+add master ip
+
+[workers]
+add workers ip
+
+[rancher]
+add rancher single node install ip
