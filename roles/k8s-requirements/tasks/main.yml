@@ -1,0 +1,24 @@
+---
+  - name: Setting modprobe br_netfilter
+    shell: modprobe br_netfilter
+
+  - name: sysctl -p /etc/sysctl.conf
+    shell: sysctl -p /etc/sysctl.conf
+  
+  - name: Setting net.bridge.bridge-nf-call-iptables=1 >> /etc/sysctl.conf
+    shell: sysctl -w net.bridge.bridge-nf-call-iptables=1 >> /etc/sysctl.conf
+
+  - name: sysctl -p /etc/sysctl.conf
+    shell: sysctl -p /etc/sysctl.conf
+
+  - name: disable swap
+    shell: swapoff -a
+
+  - name: Download and install docker(20.10) with Rancher script
+    shell:  curl https://releases.rancher.com/install-docker/20.10.sh | sh
+
+  - name: Show docker version
+    shell: docker --version
+    register: docker_version
+
+  - debug: var=docker_version.stdout_lines

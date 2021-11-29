@@ -1,0 +1,13 @@
+---
+  - name: Start rancher single node
+    shell: docker run --name rancher-bootstrap -d --restart=unless-stopped -p 80:80 -p 443:443 --privileged rancher/rancher:latest
+
+  - name: Pause after docker run
+    pause:
+      minutes: 2
+
+  - name: Getting Bootstrap Password
+    shell: docker logs rancher-bootstrap 2>&1 | grep "Bootstrap Password"
+    register: bootstrap_password
+
+  - debug: var=bootstrap_password.stdout_lines
